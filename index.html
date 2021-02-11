@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>แชร์ข้อมูล</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<form class="border border-light">
+			<center>
+				<span class="spinner-border spinner-border-lg text-primary" role="status" aria-hidden="true" id="spinner"></span>
+			</center>
+			<div class="row align-items-center">
+				<div class="col-md">
+					<center>
+						<button type="button" class="btn btn-primary btn-lg" style="width: 200px" id="shared_btn" onclick="shared()">แชร์ข้อมูล</button>
+					</center>
+				</div>
+			</div>
+			<div class="row align-items-center mt-3">
+				<div class="col-md" id="div_login">
+					<center>
+						<button type="button" class="btn btn-danger btn-lg" style="width: 200px" id="login_btn" onclick="login()">Login</button>
+					</center>
+				</div>
+			</div>
+			<div class="row align-items-center mt-3">
+				<div class="col-md">
+					<center>
+						<button type="button" class="btn btn-warning btn-lg" style="width: 200px" id="logout_btn" onclick="logout()">Logout</button>
+					</center>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script>
+		let liffUrl = 'https://liff.line.me/1655316060-R8aeZaYE'
+        var jsondata;
+        $("#shared_btn").hide();
+        $("#login_btn").hide();
+        $("#logout_btn").hide();
+
+        function getData() {
+            let url = 'https://script.google.com/macros/s/AKfycbx5LjJSUjD1yhkCVgnSLlsA2iJV8z8Ey3ZyAQ-ziBR97pOuhNDQfy_71w/exec'
+            return axios.get(url).then(res => res.data)
+        }
+        async function shared() {
+            $("#shared_btn").hide();
+            $("#spinner").show();
+            jsondata = await getData()
+          console.log(JSON.stringify(jsondata))
+            let date = Object.keys(jsondata)[0]
+            let flex = {"type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "label": "Line",
+      "uri": "https://linecorp.com/"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "Brown Cafe",
+        "weight": "bold",
+        "size": "xl",
+        "contents": []
+      },
+      {
+        "type": "box",
+        "layout": "baseline",
+        "margin": "md",
+        "contents": [
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
+            "size": "sm"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
+            "size": "sm"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
+            "size": "sm"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
+            "size": "sm"
+          },
+          {
+            "type": "icon",
+            "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "4.0",
+            "size": "sm",
+            "color": "#999999",
+            "flex": 0,
+            "margin": "md",
+            "contents": []
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "margin": "lg",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "Place",
+                "size": "sm",
+                "color": "#AAAAAA",
+                "flex": 1,
+                "contents": []
+              },
+              {
+                "type": "text",
+                "text": "Miraina Tower, 4-1-6 Shinjuku, Tokyo",
+                "size": "sm",
+                "color": "#666666",
+                "flex": 5,
+                "wrap": true,
+                "contents": []
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "Time",
+                "size": "sm",
+                "color": "#AAAAAA",
+                "flex": 1,
+                "contents": []
+              },
+              {
+                "type": "text",
+                "text": "10:00 - 23:00",
+                "size": "sm",
+                "color": "#666666",
+                "flex": 5,
+                "wrap": true,
+                "contents": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "flex": 0,
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "shared",
+          "uri": "https://liff.line.me/1655316060-R8aeZaYE"
+        },
+        "height": "sm",
+        "style": "link"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "WEBSITE",
+          "uri": "https://linecorp.com"
+        },
+        "height": "sm",
+        "style": "link"
+      },
+      {
+        "type": "spacer",
+        "size": "sm"
+      }
+    ]
+  }
+            }
+
+            if (liff.isApiAvailable("shareTargetPicker")) {
+                liff.shareTargetPicker([{
+                        "type": "flex",
+                        "altText": "ข้อมูลสถิติ",
+                        "contents": flex
+                    }])
+                    .then(function(res) {
+                        if (res) {
+                            // succeeded in sending a message through TargetPicker
+                            $("#shared_btn").show();
+                            $("#spinner").hide();
+                            console.log(`[${res.status}] ส่งเรียบร้อย!`);
+                            liff.closeWindow()
+                        } else {
+                            const [majorVer, minorVer] = (liff.getLineVersion() || "").split(".");
+                            if (parseInt(majorVer) == 10 && parseInt(minorVer) < 11) {
+                                // LINE 10.3.0 - 10.10.0
+                                // Old LINE will access here regardless of user's action
+                                console.log(
+                                    "TargetPicker was opened at least. Whether succeeded to send message is unclear"
+                                );
+                            } else {
+                                // LINE 10.11.0 -
+                                // sending message canceled
+                                $("#shared_btn").show();
+                                $("#spinner").hide();
+                                console.log("หน้าแชร์ถูกปิด");
+                            }
+                        }
+                    })
+                    .catch(function(error) {
+                        // something went wrong before sending a message
+                        console.log("เกิดข้อผิดพลาด");
+                    });
+            }
+        }
+
+        function logout() {
+            if (liff.isLoggedIn()) {
+                liff.logout();
+                $('#login_btn').show()
+                $('#logout_btn').hide()
+                alert('Logout เรียบร้อย')
+            }
+        }
+
+        function login() {
+            if (!liff.isLoggedIn()) {
+                liff.login({
+                    redirectUri: window.location
+                });
+                $('#div_login').html(` <center>
+                <span class="spinner-border spinner-border-lg text-primary" role="status" aria-hidden="true" id="spinner"></span>
+            </center>`)
+               
+            }
+        }
+	</script>
+</body>
+
+</html>
